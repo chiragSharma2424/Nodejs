@@ -30,6 +30,17 @@ app.patch('/book', (req, res) => {
     res.send("patch");
 })
 
+app.delete('/book/:id', (req, res) => {
+    const id = req.params.id;
+   const index =  BookStore.findIndex((info) => {
+        if(info.id === id) {
+            return;
+        }
+    })
+    BookStore.splice(index, 1);
+    res.send("successfully deleted");
+});
+
 app.listen(3000, () => {
     console.log("server started on 3000");
 })
