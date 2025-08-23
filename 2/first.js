@@ -7,13 +7,20 @@ const app = express();
 //   next(); // next ke bina request aage nahi jaayegi
 // });
 
-app.use('/user', (req, res, next) => {
+const loadHandler = (req, res, next) => {
+    let count = 1;
+    count = count + 1;
+    console.log(`Request count is ${count}`);
+    next();
+}
+
+app.use('/user', loadHandler, (req, res, next) => {
     res.send("hello ji");
     console.log("i am first function");
     next();
 }, 
 (req, res) => {
-    console.log("i am second function");
+    console.log("i am second function\n");
 });
 
 app.listen(3000, () => {
